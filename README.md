@@ -99,6 +99,7 @@ A comprehensive **AI-powered drug discovery platform** integrating **20+ AI mode
 - **Fragment-Based Design**: Comprehensive fragment libraries and growing algorithms
 - **Safety Assessment**: Comprehensive toxicity and ADMET profiling
 
+---
 
 ## 📊 Statistics
 
@@ -130,20 +131,22 @@ A comprehensive **AI-powered drug discovery platform** integrating **20+ AI mode
 
 ---
 
----
-
 ## 🚀 Recent Projects
 
 - **ivybiosciences-next** - Next.js application for bioinformatics
 - **ivybiosciences-modal** - Modal orchestration system
 - **ivybloom-cli** - Command-line interface for biological data
 
+---
+
 ## 📚 Documentation & Resources
 
-- **Full Documentation**: [docs.ivybiosciences.com](https://docs.ivybiosciences.com)
-- **GitHub Repository**: [ivybiosciences-next](https://github.com/ivybiosciences/ivy-biosciences-next)
+- **Full Documentation**: [docs.ivybiosciences.com](https://ivybiosciences.com/docs)
+- **GitHub Repository**: [ivybiosciences-next](https://github.com/ivybiosciences/ivybiosciences-next)
 - **API Reference**: See `docs/api/` for comprehensive endpoint documentation
 - **Contributing**: See [Contributing Guidelines](#contributing)
+
+---
 
 ## 🤝 Contributing
 
@@ -152,6 +155,8 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 - Pull request process
 - Development workflow
 - Testing requirements
+
+---
 
 ## 🛡️ Security
 
@@ -170,7 +175,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 - **GitHub Issues**: [Report bugs](https://github.com/ivybiosciences/issues)
 - **GitHub Discussions**: [Community forum](https://github.com/ivybiosciences/discussions)
 - **Email Support**: [support@ivybiosciences.com](mailto:support@ivybiosciences.com)
-- **Documentation**: [docs.ivybiosciences.com](https://docs.ivybiosciences.com)
+- **Documentation**: [ivybiosciences.com/docs](https://ivybiosciences.com/docs)
 
 ---
 
@@ -178,8 +183,8 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ![Profile Views](https://komarev.com/ghpvc/?username=ivybiosciences&color=brightgreen&style=flat-square)
 
-**License**: MIT © 2024 Ivy Biosciences
+**License**: MIT © 2025 ivy biosciences
 
-*Building the future of computational biology* 🧬
+*advancing biotechnology through innovative and disruptive approaches* 🧬
 
 </div>
