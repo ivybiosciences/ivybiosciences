@@ -140,7 +140,7 @@ A comprehensive **AI-powered drug discovery platform** integrating **20+ AI mode
 
 ## 📚 Documentation & Resources
 
-- **Full Documentation**: [docs.ivybiosciences.com](https://ivybiosciences.com/docs)
+- **Full Documentation**: [docs.ivybiosciences.com](https://ivybiosciences.com/documentation)
 - **GitHub Repository**: [ivybiosciences-next](https://github.com/ivybiosciences/ivybiosciences-next)
 - **API Reference**: See `docs/api/` for comprehensive endpoint documentation
 - **Contributing**: See [Contributing Guidelines](#contributing)
@@ -174,7 +174,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 - **GitHub Issues**: [Report bugs](https://github.com/ivybiosciences/issues)
 - **GitHub Discussions**: [Community forum](https://github.com/ivybiosciences/discussions)
 - **Email Support**: [support@ivybiosciences.com](mailto:support@ivybiosciences.com)
-- **Documentation**: [ivybiosciences.com/docs](https://ivybiosciences.com/docs)
+- **Documentation**: [ivybiosciences.com/docs](https://ivybiosciences.com/documentation)
 
 ---
 
