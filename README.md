@@ -75,7 +75,6 @@ A comprehensive **AI-powered drug discovery platform** integrating **20+ AI mode
 - **Real-time Job Monitoring**: WebSocket connections with progress tracking and status updates
 - **Atomic S3 Architecture**: Centralized file storage with detailed error reporting
 - **Progressive Enhancement**: Core functionality works without JavaScript
-- **Progressive Web App**: Offline capability for critical workflows
 - **Edge Computing**: Vercel Edge Runtime for ultra-low latency middleware and auth checks
 - **Distributed Job Processing**: FastAPI with Redis-backed queues and retry mechanisms
 
@@ -185,6 +184,6 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 **License**: MIT © 2025 ivy biosciences
 
-*advancing biotechnology through innovative and disruptive approaches* 🧬
+*advancing biotechnology through innovative and disruptive approaches*
 
 </div>
