@@ -182,8 +182,6 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ![Profile Views](https://komarev.com/ghpvc/?username=ivybiosciences&color=brightgreen&style=flat-square)
 
-**License**: MIT © 2025 ivy biosciences
-
 *advancing biotechnology through innovative and disruptive approaches*
 
 </div>
