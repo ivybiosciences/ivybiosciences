@@ -9,7 +9,6 @@
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.19.5-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2+-black.svg)](https://nextjs.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![GitHub followers](https://img.shields.io/github/followers/ivybiosciences?style=social)](https://github.com/ivybiosciences)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ivybiosciences?style=social)](https://twitter.com/ivybiosciences)
 
