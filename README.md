@@ -222,7 +222,7 @@ All public repositories use **FSL-1.1-Apache-2.0** (Functional Source License).
 
 <div align="center">
 
-*Advancing biotechnology through innovative and accessible computational tools*
+*Advancing biotechnology through innovative and disruptive approaches*
 
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.19.5-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
