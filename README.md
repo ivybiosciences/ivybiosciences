@@ -5,10 +5,7 @@
 **AI-Powered Drug Discovery Platform**
 
 [![License](https://img.shields.io/badge/License-FSL--1.1--Apache--2.0-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Public%20Beta-blue.svg)](https://ivybiosciences.com)
-[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org/)
-[![Go](https://img.shields.io/badge/Go-1.24+-00ADD8.svg)](https://golang.org/)
+[![Status](https://img.shields.io/badge/Status-Active%20Development-blue.svg)](https://ivybiosciences.com)
 
 *Democratizing computational biology through natural language*
 
@@ -18,41 +15,45 @@
 
 ## Overview
 
-Ivy Biosciences is a comprehensive drug discovery platform integrating **36+ AI models** for molecular design, protein analysis, and biomedical research. Researchers can interact through natural language queries like *"Fold this protein and dock it with aspirin"* without requiring deep computational expertise.
+Ivy Biosciences is a comprehensive drug discovery platform integrating AI tools across a broad range of scientific domains — from protein structure prediction to clinical genomics. Researchers interact through natural language queries without managing scripts, infrastructure, or computational pipelines.
 
-### Core Capabilities
+The platform spans three purpose-built applications: a web interface for interactive research, a serverless GPU backend powering the science, and a terminal client for automation and power users.
 
-| Category | Models & Tools |
-|----------|---------------|
-| **Protein Analysis** | ESMFold, binding site detection, BLAST, HMMER |
-| **Molecular Docking** | DiffDock, AutoDock Vina, scoring functions |
-| **Drug Design** | REINVENT4, fragment libraries, scaffold hopping |
-| **ADMET Profiling** | ADMETLab3, ProTox3, drug-likeness |
-| **Synthesis Planning** | AiZynthFinder, retrosynthetic routes |
-| **Literature Mining** | BioBERT, PubMed analysis |
-| **Genomics** | Scanpy, scVI for single-cell analysis |
+### Scientific Domains
+
+| Domain | Capabilities |
+|--------|-------------|
+| **Protein Structure & Design** | Structure prediction, de novo design, inverse folding, sequence design |
+| **Antibody Engineering** | Numbering & CDR extraction, humanization, developability, affinity optimization |
+| **Molecular Docking & Binding** | Flexible docking, CNN-based scoring, binding affinity & free energy prediction |
+| **Drug Design** | Generative molecular design, fragment-based design, scaffold decoration |
+| **ADMET & Pharmacology** | Pharmacokinetics, toxicity assessment, drug-likeness, PK/PD modeling |
+| **Synthesis Planning** | Retrosynthetic route analysis, compound sourcing, fragment library search |
+| **Genomics & Clinical** | Variant calling & classification, pharmacogenomics, neoantigen prediction |
+| **Omics & Systems Biology** | Transcriptomics, single-cell analysis, epigenomics, spatial omics, metabolomics |
+| **Literature & Data Mining** | Biomedical NLP, publication analysis, database federation |
 
 ---
 
 ## Platform Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                                                                     │
-│  ┌─────────────┐         ┌─────────────────┐         ┌───────────┐ │
-│  │ ivybloom-cli│         │ ivybiosciences- │         │ ivylaunch │ │
-│  │    (Go)     │────────▶│      next       │         │ (Remotion)│ │
-│  │  CLI + TUI  │         │  (Next.js Web)  │         │  Videos   │ │
-│  └─────────────┘         └────────┬────────┘         └───────────┘ │
-│                                   │                                 │
-│                                   ▼                                 │
-│                     ┌─────────────────────────┐                    │
-│                     │  ivybiosciences-modal   │                    │
-│                     │   (Python + Modal.com)  │                    │
-│                     │   36+ AI Models on GPU  │                    │
-│                     └─────────────────────────┘                    │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│                                                      │
+│  ┌─────────────┐         ┌─────────────────┐        │
+│  │ ivybloom-cli│         │ ivybiosciences- │        │
+│  │    (Go)     │────────▶│      next       │        │
+│  │  CLI + TUI  │         │  (Next.js Web)  │        │
+│  └─────────────┘         └────────┬────────┘        │
+│                                   │                  │
+│                                   ▼                  │
+│                     ┌─────────────────────────┐     │
+│                     │  ivybiosciences-modal   │     │
+│                     │   (Python + Serverless) │     │
+│                     │    AI Models on GPU     │     │
+│                     └─────────────────────────┘     │
+│                                                      │
+└──────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -60,92 +61,89 @@ Ivy Biosciences is a comprehensive drug discovery platform integrating **36+ AI 
 ## Repositories
 
 ### [ivybiosciences-next](https://github.com/ivybiosciences/ivybiosciences-next)
-**Next.js Web Application & API Gateway**
+**Web Application & API Gateway**
 
-The primary web interface featuring natural language orchestration, 3D molecular visualization (Mol*), real-time job monitoring, and comprehensive export capabilities.
+The primary web interface featuring a natural language orchestration engine, 3D molecular visualization, real-time job monitoring, and comprehensive export and reporting capabilities.
 
-| Stack | |
-|-------|---|
-| Frontend | Next.js 14, React 18, TypeScript 5.9+, Tailwind CSS v4, MUI v7 |
-| Database | Supabase (PostgreSQL + RLS) |
-| Auth | Clerk (SSO, MFA) |
-| State | Zustand + React Query v5 |
-| Hosting | Vercel |
+| | |
+|---|---|
+| **Frontend** | Next.js, React, TypeScript, Tailwind CSS |
+| **Database** | PostgreSQL with row-level security |
+| **Auth** | SSO, MFA, session management |
+| **Hosting** | Vercel |
 
-```bash
-cd ~/ivybiosciences-next
-npm run dev    # Start development server
-```
+**Key Systems:**
+
+- **AI Orchestration Engine** — Natural language interface with multi-provider LLM routing, intent detection, and automatic tool selection
+- **Passport Intelligence** — Multi-source entity reports aggregating compound, target, safety, literature, and therapeutic area data into unified dossiers
+- **Harness Runtime** — Session persistence with state checkpointing, rollback capability, and multi-client synchronization
+- **Fragment Management** — SAFE (Sequential Attachment-based Fragment Embedding) system with auto-ingestion from synthesis workflows
+- **Export Pipeline** — Normalized job results exported to PDF, DOCX, XLSX, PPTX, JSON, CSV, and specialty scientific formats
+- **3D Visualization** — Mol\* viewer for protein structures, docking poses, binding sites, and surface analysis
+- **Canvas & Collaboration** — Shared workspace with annotations, activity feed, and team project isolation
 
 ---
 
 ### [ivybiosciences-modal](https://github.com/ivybiosciences/ivybiosciences-modal)
 **Serverless GPU Compute Backend**
 
-Python-based backend running on Modal.com infrastructure with auto-scaling GPU resources (A100, A10G, T4) for computationally intensive scientific workflows.
+Python-based backend with auto-scaling GPU resources for computationally intensive scientific workflows. Scales to zero when idle.
 
-| Stack | |
-|-------|---|
-| Compute | Modal.com (serverless GPU) |
-| API | FastAPI |
-| Database | PostgreSQL (async SQLAlchemy) |
-| Cache | Upstash Redis |
+| | |
+|---|---|
+| **Compute** | Serverless GPU infrastructure |
+| **API** | FastAPI |
+| **Database** | PostgreSQL |
+| **Cache** | Redis |
 
-```bash
-cd ~/ivybiosciences-modal
-modal deploy ivyai/server_app_modal_refactor/main.py
-```
+**Key Systems:**
+
+- **Unified Tool Registry** — Centralized definitions with parameter validation, tier-based access control, and dispatch routing
+- **Harness Framework** — Unified tool execution with job dispatch, state management, webhook callbacks, crash recovery, and enterprise extension points
+- **Enhanced Output Schemas** — Multiple analysis levels with confidence scoring, applicability domain assessment, and uncertainty quantification
+- **Biologics Common** — Shared utilities for PDB validation, antibody numbering, CDR extraction, liability scanning, and cross-app structure exchange
+- **Artifact Storage** — S3-compatible storage for PDB structures, SDF molecules, MD trajectories, and batch manifests
 
 ---
 
 ### [ivybloom-cli](https://github.com/ivybiosciences/ivybloom-cli)
 **Terminal Interface**
 
-Production-ready Go CLI with an interactive TUI dashboard for power users, batch processing, and CI/CD integration.
+Go CLI with an interactive TUI dashboard, MCP server for AI assistant integration, and offline-first sync for disconnected environments.
 
-| Stack | |
-|-------|---|
-| Language | Go 1.24+ |
-| CLI | Cobra |
-| TUI | Charmbracelet (Bubbletea, Lipgloss) |
-| Auth | Browser OAuth, API keys, device flow |
+| | |
+|---|---|
+| **Language** | Go |
+| **CLI** | Cobra |
+| **TUI** | Charmbracelet (Bubbletea, Lipgloss) |
+| **MCP** | Model Context Protocol server |
+| **Auth** | OAuth, API keys, device flow |
 
-```bash
-# Installation
-brew install ivybiosciences/tap/ivybloom
-# or
-npm install -g ivybloom
-# or
-curl -fsSL https://raw.githubusercontent.com/ivybiosciences/ivybloom-cli/main/install.sh | bash
+**Key Systems:**
 
-# Usage
-ivybloom auth login
-ivybloom run esmfold protein_sequence=MKLLVLGLVGFGVG
-ivybloom tui  # Interactive dashboard
-```
+- **Result Viewer System** — Job types automatically routed to specialized TUI viewers (metrics, tables, molecule grids, passport reports, synthesis route trees, artifacts, exports)
+- **MCP Server** — Full Model Context Protocol server for AI assistant integration
+- **Agent & Script Modes** — JSON envelope output for CI/CD, streaming text for shell scripts, and headless operation for automation
+- **Session Checkpointing** — Point-in-time snapshots with rollback capability
+- **Offline-First Sync** — Change queue for disconnected environments with automatic reconciliation
 
 ---
 
-### [ivylaunch](https://github.com/ivybiosciences/ivylaunch)
-**Video Generation**
+## Key Features
 
-Remotion-based video generation for marketing and launch campaigns. Produces multiple compositions from 45s teasers to 2.5min showcases.
-
-| Stack | |
-|-------|---|
-| Framework | Remotion 4.0 |
-| Frontend | React 19, TypeScript |
-| Output | 1920x1080 @ 30fps MP4 |
-
-```bash
-cd ~/ivylaunch
-npm start           # Remotion Studio
-npm run build:all   # Render all compositions
-```
+- **Natural Language Interface** — Query scientific tools conversationally
+- **Passport Intelligence** — Comprehensive entity dossiers for compounds, targets, safety profiles, literature, and therapeutic areas
+- **3D Molecular Visualization** — Mol\* viewer for proteins, docking poses, and binding sites
+- **Real-time Job Monitoring** — Live progress tracking
+- **Multi-format Export** — PDF, DOCX, XLSX, PPTX, JSON, CSV, PDB, SDF, and specialty scientific formats
+- **Guest Mode** — Try without an account (rate-limited)
+- **CLI + TUI + MCP** — Terminal interface with batch processing, interactive dashboard, and AI assistant integration
+- **Auto-scaling GPU** — Serverless compute that scales to zero when idle
+- **Self-Hosting** — Deploy on your own infrastructure for data sovereignty
 
 ---
 
-## Tech Stack Overview
+## Tech Stack
 
 ### Languages
 ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -159,39 +157,26 @@ npm run build:all   # Render all compositions
 
 ### Backend & Infrastructure
 ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![Supabase](https://img.shields.io/badge/-Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
 ![Redis](https://img.shields.io/badge/-Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
-![Modal](https://img.shields.io/badge/-Modal.com-000000?style=flat-square)
+![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
 ### Scientific Computing
 ![Mol*](https://img.shields.io/badge/-Mol*-4A90E2?style=flat-square)
 ![RDKit](https://img.shields.io/badge/-RDKit-FF6B6B?style=flat-square)
-![BioBERT](https://img.shields.io/badge/-BioBERT-9B59B6?style=flat-square)
-
----
-
-## Key Features
-
-- **Natural Language Interface** - Query AI models conversationally
-- **36+ Integrated AI Models** - ESMFold, DiffDock, REINVENT4, ADMET, and more
-- **3D Molecular Visualization** - Mol* viewer for proteins and molecules
-- **Real-time Job Monitoring** - WebSocket-based progress tracking
-- **Multi-format Export** - PDF, XLSX, PPTX, SVG, PDB, SDF
-- **Guest Mode** - Try without account (rate-limited)
-- **CLI + TUI** - Full terminal interface with batch processing
-- **Auto-scaling GPU** - A100, A10G, T4 via Modal.com
+![D3](https://img.shields.io/badge/-D3.js-F9A03C?style=flat-square&logo=d3dotjs&logoColor=white)
 
 ---
 
 ## Security
 
-- **Clerk Authentication** - SSO, MFA, session management
-- **Row-Level Security** - Supabase RLS policies
-- **CSRF Protection** - Token validation
-- **Rate Limiting** - Upstash-based throttling
-- **Audit Logging** - Comprehensive activity tracking
-- **API Protection** - Tiered access control
+- **Authentication** — SSO, MFA, session management, API key validation
+- **Row-Level Security** — Database-level access policies per user and project
+- **CSRF Protection** — Token validation on all state-changing requests
+- **Rate Limiting** — Request throttling with tiered limits
+- **Audit Logging** — Comprehensive activity tracking and compliance controls
+- **API Protection** — Tiered access control with RBAC
+- **HMAC Auth** — Machine-to-machine authentication for backend services
 
 ---
 
@@ -199,7 +184,7 @@ npm run build:all   # Render all compositions
 
 All public repositories use **FSL-1.1-Apache-2.0** (Functional Source License).
 
-- **Allowed:** Self-hosting, internal use, building integrations
+- **Allowed:** Self-hosting, internal use, building integrations, CRO client work
 - **Not Allowed:** Offering as competing SaaS (until Apache conversion in 2 years)
 
 ---
@@ -207,7 +192,8 @@ All public repositories use **FSL-1.1-Apache-2.0** (Functional Source License).
 ## Documentation & Resources
 
 - **Documentation:** [ivybiosciences.com/docs](https://ivybiosciences.com/documentation)
-- **API Reference:** Available in each repository's docs
+- **Self-Hosting:** [Self-Hosting Guide](https://github.com/ivybiosciences/ivybiosciences-next/blob/main/docs/self-hosting/README.md)
+- **API Reference:** Available in each repository
 - **GitHub:** [github.com/ivybiosciences](https://github.com/ivybiosciences)
 
 ---
@@ -224,9 +210,6 @@ All public repositories use **FSL-1.1-Apache-2.0** (Functional Source License).
 
 *Advancing biotechnology through innovative and disruptive approaches*
 
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.19.5-brightgreen.svg)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2+-black.svg)](https://nextjs.org/)
 [![GitHub followers](https://img.shields.io/github/followers/ivybiosciences?style=social)](https://github.com/ivybiosciences)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ivybiosciences?style=social)](https://twitter.com/ivybiosciences)
 
