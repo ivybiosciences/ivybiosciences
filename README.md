@@ -102,7 +102,7 @@ Python-based backend with auto-scaling GPU resources for computationally intensi
 - **Harness Framework** — Unified tool execution with job dispatch, state management, webhook callbacks, crash recovery, and enterprise extension points
 - **Enhanced Output Schemas** — Multiple analysis levels with confidence scoring, applicability domain assessment, and uncertainty quantification
 - **Biologics Common** — Shared utilities for PDB validation, antibody numbering, CDR extraction, liability scanning, and cross-app structure exchange
-- **Artifact Storage** — S3-compatible storage for PDB structures, SDF molecules, MD trajectories, and batch manifests
+- **Artifact Storage** — AWS S3 storage for PDB structures, SDF molecules, MD trajectories, and batch manifests
 
 ---
 
@@ -192,7 +192,7 @@ All public repositories use **FSL-1.1-Apache-2.0** (Functional Source License).
 ## Documentation & Resources
 
 - **Documentation:** [ivybiosciences.com/docs](https://ivybiosciences.com/documentation)
-- **Self-Hosting:** [Self-Hosting Guide](https://github.com/ivybiosciences/ivybiosciences-next/blob/main/docs/self-hosting/README.md)
+- **Self-Hosting:** [Self-Hosting Guide](https://github.com/ivybiosciences/ivybiosciences-next/blob/vine/docs/self-hosting/README.md)
 - **API Reference:** Available in each repository
 - **GitHub:** [github.com/ivybiosciences](https://github.com/ivybiosciences)
 
