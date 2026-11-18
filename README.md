@@ -1,216 +1,138 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/leaf-on-dark.png">
+  <img src="assets/leaf-on-light.png" alt="Ivy Biosciences leaf" width="160">
+</picture>
+
 # Ivy Biosciences
 
-**AI-Powered Drug Discovery Platform**
+**Fold, dock, screen and plan the synthesis, in one question.**
 
-[![License](https://img.shields.io/badge/License-FSL--1.1--Apache--2.0-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active%20Development-blue.svg)](https://ivybiosciences.com)
+[Website](https://www.ivybiosciences.com) · [Docs](https://www.ivybiosciences.com/docs) · [Models](https://www.ivybiosciences.com/models) · [Pricing](https://www.ivybiosciences.com/pricing) · [Security](https://www.ivybiosciences.com/security) · [Pleach](https://www.getpleach.com)
 
-*Democratizing computational biology through natural language*
+[![License](https://img.shields.io/badge/license-FSL--1.1--Apache--2.0-2d5016?style=flat-square)](#license)
+[![npm](https://img.shields.io/npm/v/@ivybiosciences/ivybloom-cli?label=ivybloom&color=2d5016&style=flat-square)](https://www.npmjs.com/package/@ivybiosciences/ivybloom-cli)
+![Profile views](https://komarev.com/ghpvc/?username=ivybiosciences&label=profile%20views&color=2d5016&style=flat-square)
 
 </div>
 
----
+## .bloom\*
 
-## Overview
+**.bloom\*** is 500+ biomedical tools and 75+ databases behind one account. Ask **Ivy**, the agent, and it plans the run, submits each job and feeds its output into the next. Or skip the planner and submit a single tool job yourself.
 
-Ivy Biosciences is a comprehensive drug discovery platform integrating AI tools across a broad range of scientific domains — from protein structure prediction to clinical genomics. Researchers interact through natural language queries without managing scripts, infrastructure, or computational pipelines.
+Every result names the tool, the parameters and the run that produced it. You leave with what the run made: a structure, a ranked table, an export.
 
-The platform spans three purpose-built applications: a web interface for interactive research, a serverless GPU backend powering the science, and a terminal client for automation and power users.
+## Four ways in
 
-### Scientific Domains
+The same run, whichever way in.
 
-| Domain | Capabilities |
-|--------|-------------|
-| **Protein Structure & Design** | Structure prediction, de novo design, inverse folding, sequence design |
-| **Antibody Engineering** | Numbering & CDR extraction, humanization, developability, affinity optimization |
-| **Molecular Docking & Binding** | Flexible docking, CNN-based scoring, binding affinity & free energy prediction |
-| **Drug Design** | Generative molecular design, fragment-based design, scaffold decoration |
-| **ADMET & Pharmacology** | Pharmacokinetics, toxicity assessment, drug-likeness, PK/PD modeling |
-| **Synthesis Planning** | Retrosynthetic route analysis, compound sourcing, fragment library search |
-| **Genomics & Clinical** | Variant calling & classification, pharmacogenomics, neoantigen prediction |
-| **Omics & Systems Biology** | Transcriptomics, single-cell analysis, epigenomics, spatial omics, metabolomics |
-| **Literature & Data Mining** | Biomedical NLP, publication analysis, database federation |
+**Web.** Ask Ivy at [ivybiosciences.com](https://www.ivybiosciences.com). No account is needed to start: guests get up to $1 of compute per day.
 
----
+**Terminal.** `ivybloom` is a chat TUI, a job runner and a batch tool. It needs a free account.
 
-## Platform Architecture
-
-```
-┌──────────────────────────────────────────────────────┐
-│                                                      │
-│  ┌─────────────┐         ┌─────────────────┐        │
-│  │ ivybloom-cli│         │ ivybiosciences- │        │
-│  │    (Go)     │────────▶│      next       │        │
-│  │  CLI + TUI  │         │  (Next.js Web)  │        │
-│  └─────────────┘         └────────┬────────┘        │
-│                                   │                  │
-│                                   ▼                  │
-│                     ┌─────────────────────────┐     │
-│                     │  ivybiosciences-modal   │     │
-│                     │   (Python + Serverless) │     │
-│                     │    AI Models on GPU     │     │
-│                     └─────────────────────────┘     │
-│                                                      │
-└──────────────────────────────────────────────────────┘
+```bash
+npm install -g @ivybiosciences/ivybloom-cli && ivybloom auth login
+ivybloom run esmfold protein_sequence=MKFLILLFNILCLFPVLAADNH --wait   # one job
+ivybloom batch submit jobs.yaml                                        # many jobs
+ivybloom                                                               # chat with Ivy
 ```
 
----
+**HTTP.** Ask Ivy with one `curl`, no key required on the guest tier:
+
+```bash
+curl -N https://www.ivybiosciences.com/api/v1/orchestrate \
+  -H 'Content-Type: application/json' \
+  -d '{"prompt":"find recent papers on EGFR L858R resistance","stream":true}'
+```
+
+Or submit one tool job directly with an API key:
+
+```bash
+curl -X POST https://www.ivybiosciences.com/api/v1/jobs \
+  -H "Authorization: Bearer $IVY_API_KEY" -H "Content-Type: application/json" \
+  -d '{"tool_name":"esmfold","tool_input_parameters":{"protein_sequence":"MKFLILLFNILCLFPVLAADNH"}}'
+```
+
+**Your agent.** Any MCP client can use the CLI as a server:
+
+```json
+{ "mcpServers": { "ivybloom": { "command": "ivybloom", "args": ["mcp", "serve"] } } }
+```
+
+Agents without MCP can read [`/llms.txt`](https://www.ivybiosciences.com/llms.txt), [`/llms-full.txt`](https://www.ivybiosciences.com/llms-full.txt) or the installable [`SKILL.md`](https://www.ivybiosciences.com/SKILL.md).
+
+## What it computes
+
+| Domain | What it does | Examples |
+| ------ | ------------ | -------- |
+| **Explore** | Search literature, databases and public repositories | PubMed, ChEMBL, ClinVar |
+| **Analyze** | Screen compounds, predict properties, assess safety | ADMET-AI, RDKit, safety screening |
+| **Predict** | Fold proteins, dock molecules, simulate binding | ESMFold, Boltz-2, DiffDock, OpenMM |
+| **Design** | Generate molecules, engineer proteins, design biologics | Fragment chemistry, ThermoMPNN, antibody annotation |
+| **Omics and clinical** | Analyze genomes, transcriptomes and clinical data | BLAST, CellTypist, bulk RNA-seq, CRISPR guide design |
+| **Reports and automation** | Generate passports, export data, automate lab work | AiZynthFinder routes, Opentrons protocols, patent landscapes |
+
+Browse the full catalog at [ivybiosciences.com/models](https://www.ivybiosciences.com/models).
+
+## A record you can check
+
+Signed-in runs from the web app, the terminal, `curl` or MCP all write to the same hash-chained record. Edit a row and the chain breaks at the verifier. It detects modification; it does not prevent it, and it is not access control.
+
+You also pick the model: Anthropic directly or through OpenRouter, across the model families your plan includes, or bring your own key.
 
 ## Repositories
 
-### [ivybiosciences-next](https://github.com/ivybiosciences/ivybiosciences-next)
-**Web Application & API Gateway**
+```mermaid
+flowchart LR
+    B["Browser"] --> W["ivybiosciences-next<br/>web app, API, agent"]
+    C["ivybloom-cli<br/>terminal, MCP"] --> W
+    H["curl / your agent"] --> W
+    W --> M["ivybiosciences-modal<br/>tool apps on GPU"]
+    W --> S["Per-chat code sandbox"]
+```
 
-The primary web interface featuring a natural language orchestration engine, 3D molecular visualization, real-time job monitoring, and comprehensive export and reporting capabilities.
+| Repository | What it is | Built with |
+| ---------- | ---------- | ---------- |
+| [**ivybiosciences-next**](https://github.com/ivybiosciences/ivybiosciences-next) | The web app, the public API, and Ivy: the agent that picks and chains tools. Includes a Mol\* 3D viewer and a canvas of result cards. The `@pleach/*` runtime is developed here. | TypeScript, Next.js, React |
+| [**ivybiosciences-modal**](https://github.com/ivybiosciences/ivybiosciences-modal) | The compute backend: one serverless app per scientific tool, the job orchestrator, and the isolated code sandbox each chat gets. Scales to zero when idle. | Python, FastAPI, Modal |
+| [**ivybloom-cli**](https://github.com/ivybiosciences/ivybloom-cli) | `ivybloom`: chat TUI, `run` / `jobs` / `batch` commands, JSON envelopes for CI, and an MCP server with selectable toolsets. macOS, Linux and Windows. | Go |
 
-| | |
-|---|---|
-| **Frontend** | Next.js, React, TypeScript, Tailwind CSS |
-| **Database** | PostgreSQL with row-level security |
-| **Auth** | SSO, MFA, session management |
-| **Hosting** | Vercel |
+Organizations that need data sovereignty or their own compute can self-host. Start with the [Self-Hosting Guide](https://github.com/ivybiosciences/ivybiosciences-next/blob/vine/docs/self-hosting/README.md).
 
-**Key Systems:**
+## Pleach
 
-- **AI Orchestration Engine** — Natural language interface with multi-provider LLM routing, intent detection, and automatic tool selection
-- **Passport Intelligence** — Multi-source entity reports aggregating compound, target, safety, literature, and therapeutic area data into unified dossiers
-- **Harness Runtime** — Session persistence with state checkpointing, rollback capability, and multi-client synchronization
-- **Fragment Management** — SAFE (Sequential Attachment-based Fragment Embedding) system with auto-ingestion from synthesis workflows
-- **Export Pipeline** — Normalized job results exported to PDF, DOCX, XLSX, PPTX, JSON, CSV, and specialty scientific formats
-- **3D Visualization** — Mol\* viewer for protein structures, docking poses, binding sites, and surface analysis
-- **Canvas & Collaboration** — Shared workspace with annotations, activity feed, and team project isolation
+The agent runtime inside Ivy is being carved out as [**Pleach**](https://www.getpleach.com) (`@pleach/*`): an agent runtime for regulated work, usable in any AI application.
 
----
+Pleach writes every model call as a typed, hash-chained, replayable row in your own database. Around that row it provides:
 
-### [ivybiosciences-modal](https://github.com/ivybiosciences/ivybiosciences-modal)
-**Serverless GPU Compute Backend**
+- **Tamper evidence.** Each row carries the hash of the one before it, and `verifyChain` names the first row that does not match.
+- **Trusted time.** The chain can be anchored to an RFC 3161 time-stamp authority you choose.
+- **Human approval.** A tool can wait for a person, and the decision is written as a chained row.
+- **Replay.** A recorded turn is re-served from the record, and the first request that drifts is named.
+- **Family-locked routing.** A session stays inside the model family it started in.
+- **Cost rollup.** Every subagent call carries the turn that caused it, so spend totals by root turn in one query.
 
-Python-based backend with auto-scaling GPU resources for computationally intensive scientific workflows. Scales to zero when idle.
-
-| | |
-|---|---|
-| **Compute** | Serverless GPU infrastructure |
-| **API** | FastAPI |
-| **Database** | PostgreSQL |
-| **Cache** | Redis |
-
-**Key Systems:**
-
-- **Unified Tool Registry** — Centralized definitions with parameter validation, tier-based access control, and dispatch routing
-- **Harness Framework** — Unified tool execution with job dispatch, state management, webhook callbacks, crash recovery, and enterprise extension points
-- **Enhanced Output Schemas** — Multiple analysis levels with confidence scoring, applicability domain assessment, and uncertainty quantification
-- **Biologics Common** — Shared utilities for PDB validation, antibody numbering, CDR extraction, liability scanning, and cross-app structure exchange
-- **Artifact Storage** — AWS S3 storage for PDB structures, SDF molecules, MD trajectories, and batch manifests
-
----
-
-### [ivybloom-cli](https://github.com/ivybiosciences/ivybloom-cli)
-**Terminal Interface**
-
-Go CLI with an interactive TUI dashboard, MCP server for AI assistant integration, and offline-first sync for disconnected environments.
-
-| | |
-|---|---|
-| **Language** | Go |
-| **CLI** | Cobra |
-| **TUI** | Charmbracelet (Bubbletea, Lipgloss) |
-| **MCP** | Model Context Protocol server |
-| **Auth** | OAuth, API keys, device flow |
-
-**Key Systems:**
-
-- **Result Viewer System** — Job types automatically routed to specialized TUI viewers (metrics, tables, molecule grids, passport reports, synthesis route trees, artifacts, exports)
-- **MCP Server** — Full Model Context Protocol server for AI assistant integration
-- **Agent & Script Modes** — JSON envelope output for CI/CD, streaming text for shell scripts, and headless operation for automation
-- **Session Checkpointing** — Point-in-time snapshots with rollback capability
-- **Offline-First Sync** — Change queue for disconnected environments with automatic reconciliation
-
----
-
-## Key Features
-
-- **Natural Language Interface** — Query scientific tools conversationally
-- **Passport Intelligence** — Comprehensive entity dossiers for compounds, targets, safety profiles, literature, and therapeutic areas
-- **3D Molecular Visualization** — Mol\* viewer for proteins, docking poses, and binding sites
-- **Real-time Job Monitoring** — Live progress tracking
-- **Multi-format Export** — PDF, DOCX, XLSX, PPTX, JSON, CSV, PDB, SDF, and specialty scientific formats
-- **Guest Mode** — Try without an account (rate-limited)
-- **CLI + TUI + MCP** — Terminal interface with batch processing, interactive dashboard, and AI assistant integration
-- **Auto-scaling GPU** — Serverless compute that scales to zero when idle
-- **Self-Hosting** — Deploy on your own infrastructure for data sovereignty
-
----
-
-## Tech Stack
-
-### Languages
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Go](https://img.shields.io/badge/-Go-00ADD8?style=flat-square&logo=go&logoColor=white)
-
-### Frontend
-![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
-![Tailwind](https://img.shields.io/badge/-Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
-
-### Backend & Infrastructure
-![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/-Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
-![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
-
-### Scientific Computing
-![Mol*](https://img.shields.io/badge/-Mol*-4A90E2?style=flat-square)
-![RDKit](https://img.shields.io/badge/-RDKit-FF6B6B?style=flat-square)
-![D3](https://img.shields.io/badge/-D3.js-F9A03C?style=flat-square&logo=d3dotjs&logoColor=white)
-
----
-
-## Security
-
-- **Authentication** — SSO, MFA, session management, API key validation
-- **Row-Level Security** — Database-level access policies per user and project
-- **CSRF Protection** — Token validation on all state-changing requests
-- **Rate Limiting** — Request throttling with tiered limits
-- **Audit Logging** — Comprehensive activity tracking and compliance controls
-- **API Protection** — Tiered access control with RBAC
-- **HMAC Auth** — Machine-to-machine authentication for backend services
-
----
+These are mechanisms, not a certification. Packages include `@pleach/core`, `react`, `recipes`, `gateway`, `compliance`, `eval`, `replay`, `observe`, `mcp`, `langchain`, `sandbox` and `coding-agent`. They are **not on npm yet**; some names are reserved with `0.0.1` placeholders. Documentation and package status are at [getpleach.com/docs](https://www.getpleach.com/docs).
 
 ## License
 
-All public repositories use **FSL-1.1-Apache-2.0** (Functional Source License).
+All Ivy Biosciences and Pleach code is licensed under **FSL-1.1-Apache-2.0**, the [Functional Source License](https://fsl.software) with an Apache 2.0 future license. Each release converts to Apache 2.0 two years after it is published.
 
-- **Allowed:** Self-hosting, internal use, building integrations, CRO client work
-- **Not Allowed:** Offering as competing SaaS (until Apache conversion in 2 years)
+- **You can** self-host for your organization, use it internally for research, build integrations, and run it as a CRO serving clients.
+- **You cannot** offer it as a competing hosted service or resell API access, until a release converts.
 
----
+Individual compute apps wrap upstream models that may carry their own licenses. The `LICENSE.md` in each repository has the full terms.
 
-## Documentation & Resources
+## Contact
 
-- **Documentation:** [ivybiosciences.com/docs](https://ivybiosciences.com/documentation)
-- **Self-Hosting:** [Self-Hosting Guide](https://github.com/ivybiosciences/ivybiosciences-next/blob/vine/docs/self-hosting/README.md)
-- **API Reference:** Available in each repository
-- **GitHub:** [github.com/ivybiosciences](https://github.com/ivybiosciences)
-
----
-
-## Support
-
-- **GitHub Issues:** Report bugs in respective repositories
-- **Email:** support@ivybiosciences.com
-- **Enterprise:** admin@ivybiosciences.com
-
----
+| | |
+| --- | --- |
+| **Support** | [support@ivybiosciences.com](mailto:support@ivybiosciences.com) |
+| **Enterprise and self-hosting** | [admin@ivybiosciences.com](mailto:admin@ivybiosciences.com) |
+| **Security reports** | [security@ivybiosciences.com](mailto:security@ivybiosciences.com). Please do not open a public issue for a vulnerability. |
+| **Updates** | [@ivybiosciences on X](https://x.com/ivybiosciences) |
 
 <div align="center">
-
-*Advancing biotechnology through innovative and disruptive approaches*
-
-[![GitHub followers](https://img.shields.io/github/followers/ivybiosciences?style=social)](https://github.com/ivybiosciences)
-[![Twitter Follow](https://img.shields.io/twitter/follow/ivybiosciences?style=social)](https://twitter.com/ivybiosciences)
-
+<sub>Copyright 2024-2026 Ivy Biosciences, Inc.</sub>
 </div>
